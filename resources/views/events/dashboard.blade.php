@@ -5,7 +5,7 @@
     <div class="col-md-10 offset-md-1 deshboard-title-container">
         <h1>Meus Eventos</h1>
     </div>
-    <div class="col-md-10 offset-md-1 deshboard-title-container">
+    <div class="col-md-10 offset-md-1 deshboard-events-container">
         @if(count($events) > 0)
             <table class="table">
                 <thead>
@@ -16,17 +16,24 @@
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach($events as $event)
+                        <tr>
+                            <td scropt="row"> {{ $loop->index + 1 }} </td>
+                            <td><a href="/events/{{ $event->id }}">{{ $event->title }}</a></td>
+                            <td>0</td>
+                            <td>
+                                <a href="/events/edit/{{ $event->id }}" class="btn btn-info edit-bnt"><ion-icon name="create-outline"></ion-icon> Editar</a>
+                                <form action="/events/{{ $event->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger delete-btn"><ion-icon name="trash-outline"></ion-icon> Deletar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>            
             </table>
-            <tbody>
-                @foreach
-                    <tr>
-                        <td scropt="row"> {{ $loop->index + 1 }} </td>
-                        <td><a href="/event/{{ $event->id }}">{{ $event->title }}</a></td>
-                        <td>0</td>
-                        <td><a href="#">Editar</a> <a href="#">Deletar</a></td>
-                    </tr>
-                @endforeach
-            </tbody>
         @else
             <p>Você ainda não tem eventos, <a href="/events/create">Criar Eventos</a></p>
         @endif

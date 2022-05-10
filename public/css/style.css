@@ -221,6 +221,15 @@
         width: 25%;
     }
 
+    .deshboard-events-container form {
+        display: inline-block;
+    }
+
+    .img-preview {
+        width: 100px;
+        margin-top: 20px;
+    }
+
     footer p {
         margin-bottom: 0;
         font-size: 12px;
